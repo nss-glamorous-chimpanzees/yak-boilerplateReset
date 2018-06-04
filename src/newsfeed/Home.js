@@ -69,7 +69,7 @@ export default class Home extends Component {
                         </div>
                     </div>
                     <div className="col col-sm-3">
-                        <AdList />
+                        <AdList activeUser={this.props.activeUser} />
                     </div>
                 </div>
             </div>
