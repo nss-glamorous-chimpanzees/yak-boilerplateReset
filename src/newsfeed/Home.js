@@ -49,7 +49,7 @@ export default class Home extends Component {
             <div className="container-full">
                 <div className="row">
                     <div className="col col-sm-3">
-                        <FriendList />
+                        <FriendList activeUser={this.props.activeUser} showView={this.props.showView} setViewingUser={this.props.setViewingUser} />
                     </div>
                     <div className="col content col-sm-6">
                         <div className="newsfeed">
