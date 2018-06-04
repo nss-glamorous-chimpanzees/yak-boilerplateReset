@@ -4,6 +4,7 @@
   "private": true,
   "dependencies": {
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
     "react-router-dom": "^4.2.2",
 >>>>>>> d92d0c1357c6b0564a7637c1a67739cc8bd38e3a
@@ -17,6 +18,15 @@
 =======
     "react-dom": "^16.4.0"
 >>>>>>> d92d0c1357c6b0564a7637c1a67739cc8bd38e3a
+=======
+  "react-router-dom": "^4.2.2",
+  "bootstrap": "^4.1.1",
+  "jquery": "^3.3.1",
+  "react": "^16.4.0",
+  "react-bootstrap": "^0.32.1",
+  "react-dom": "^16.4.0",
+  "react-scripts": "1.1.4"
+>>>>>>> a906c27ba8fa1ea6b97bdec97758b205cb411a7f
   },
   "scripts": {
     "start": "react-scripts start",
