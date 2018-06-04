@@ -22,7 +22,7 @@ export default class Login extends Component {
         e.preventDefault()
 
         // Determine if a user already exists in API
-        fetch(`http://localhost:5001/users?email=${this.state.email}`)
+        fetch(`http://localhost:5001/users?email=${this.state.email}&password=${this.state.password}`)
             .then(r => r.json())
             .then(user => {
                 // User exists. Set local storage, and show home view
@@ -32,20 +32,21 @@ export default class Login extends Component {
 
                 // User doesn't exist
                 } else {
-                    // Create user in API
-                    fetch("http://localhost:5001/users", {
-                        method: "POST",
-                        headers: {
-                            "Content-Type": "application/json"
-                        },
-                        body: JSON.stringify({email: this.state.email, password: this.state.password})
-                    })
+                    alert("Email and Password Do Not Match Our Records.")
+                    // // Create user in API
+                    // fetch("http://localhost:5001/users", {
+                    //     method: "POST",
+                    //     headers: {
+                    //         "Content-Type": "application/json"
+                    //     },
+                    //     body: JSON.stringify({email: this.state.email, password: this.state.password})
+                    // })
 
-                    // Set local storage with newly created user's id and show home view
-                    .then(newUser => {
-                        this.props.setActiveUser(newUser.id)
-                        this.props.showView("home")
-                    })
+                    // // Set local storage with newly created user's id and show home view
+                    // .then(newUser => {
+                    //     this.props.setActiveUser(newUser.id)
+                    //     this.props.showView("home")
+                    // })
                 }
 
             })
