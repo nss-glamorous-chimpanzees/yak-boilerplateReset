@@ -51,6 +51,9 @@ export default class Login extends Component {
             })
     }.bind(this)
 
+    registerButtonClick = () => {
+      this.props.showView("register")
+    }
 
     /*
         TODO:
@@ -60,6 +63,7 @@ export default class Login extends Component {
     */
     render() {
         return (
+          <div className="formDiv">
             <form className="form-signin" onSubmit={this.handleLogin}>
                 <h1 className="h3 mb-3 font-weight-normal">Please sign in</h1>
                 <label htmlFor="inputEmail" className="sr-only">Email address</label>
@@ -70,8 +74,11 @@ export default class Login extends Component {
                     <input type="checkbox" value="remember-me" /> Remember me
                 </div>
                 <button className="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+                
+                <button id="login__register" className="btn btn-lg btn-info btn-block" onClick={this.registerButtonClick}>Register</button>
                 <p className="mt-5 mb-3 text-muted">© 2017-2018</p>
             </form>
+            </div>
         )
     }
 }
