@@ -84,7 +84,7 @@ class App extends Component {
                 case "logout":
                     return <Login showView={this.showView} setActiveUser={this.setActiveUser} />
                 case "results":
-                    return <SearchResults terms={this.state.searchTerms} />
+                    return <SearchResults terms={this.state.searchTerms} setViewingUser={this.setViewingUser} showView={this.showView}  />
                 case "profile":
                     return <Profile showView={this.showView} viewingUser={this.state.viewingUser}/>
                 case "home":

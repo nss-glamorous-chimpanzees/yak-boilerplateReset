@@ -35,6 +35,11 @@ export default class SearchResults extends Component {
             })
     }
 
+    switchToProfile = function (event) {
+        this.props.setViewingUser(event.target.id.split("_")[1])
+        this.props.showView("profile")
+    }.bind(this)
+
     render() {
         return (
             <div className="searchResults">
@@ -60,7 +65,7 @@ export default class SearchResults extends Component {
                             <img className="card-img-top avatar" src={Avatar} alt="Generic person image" />
                             <div className="card-body">
                                 <h5 className="card-title">{u.email}</h5>
-                                <a href="#" className="btn btn-outline-success">View profile</a>
+                                <a href="#" id={`profilebtn_${u.id}`} onClick={this.switchToProfile} className="btn btn-outline-success">View profile</a>
                             </div>
                         </div>
                     )
