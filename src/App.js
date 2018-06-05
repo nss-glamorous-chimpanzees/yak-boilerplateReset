@@ -115,7 +115,7 @@ class App extends Component {
             />
           );
         case "results":
-          return <SearchResults terms={this.state.searchTerms} />;
+          return <SearchResults terms={this.state.searchTerms} setViewingUser={this.setViewingUser} showView={this.showView} />;
         case "profile":
           return <Profile activeUser={this.state.activeUser} showView={this.showView} viewingUser={this.state.viewingUser}/>
         case "home":

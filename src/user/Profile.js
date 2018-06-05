@@ -35,7 +35,7 @@ class Profile extends Component {
         alert(`You sent ${this.state.userObject.first} a friend request!`)
         this.props.showView("home")
     }.bind(this)
-
+    //handler for the accept friend button
     acceptFriend = function () {
         const friendRequest = {requestingFriendId: parseInt(this.props.viewingUser), acceptedFriendId: this.props.activeUser}
         fetch(`http://localhost:5001/friends`,
@@ -50,7 +50,8 @@ class Profile extends Component {
         alert (`You and ${this.state.userObject.first} are now friends!`)
         this.props.showView("home")
     }.bind(this)
-        
+    
+    //handler for the reject friend button
     rejectFriend = function () {
         fetch(`http://localhost:5001/friendRequests/${this.state.requestObject.id}`, {method: "DELETE"})
         this.props.showView("home")
