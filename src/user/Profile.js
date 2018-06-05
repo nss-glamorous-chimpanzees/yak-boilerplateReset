@@ -19,7 +19,10 @@ class Profile extends Component {
     render() {
         return (
             <div className="profile">
-            <h3>{this.state.userObject.email}</h3>
+            <img src={this.state.userObject.image}/>
+            <h3>{this.state.userObject.first} {this.state.userObject.last}</h3>
+            <p>{this.state.userObject.location}</p>
+            <p>{this.state.userObject.email}</p>
             </div>
         )
     }
