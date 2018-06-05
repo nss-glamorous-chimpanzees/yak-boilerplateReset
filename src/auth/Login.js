@@ -70,9 +70,9 @@ export default class Login extends Component {
             <form className="form-signin" onSubmit={this.handleLogin}>
                 <h1 className="h3 mb-3 font-weight-normal">Please sign in</h1>
                 <label htmlFor="inputEmail" className="sr-only">Email address</label>
-                <input onChange={this.handleFieldChange} defaultValue={this.props.newEmail} type="email" id="email" className="form-control" required="" autoFocus="" />
+                <input onChange={this.handleFieldChange} defaultValue={this.props.newEmail} placeholder="Email address" type="email" id="email" className="form-control" required="" autoFocus="" />
                 <label htmlFor="inputPassword" className="sr-only">Password</label>
-                <input onChange={this.handleFieldChange} type="password" id="password" className="form-control" defaultValue={this.props.newPassword} required="" />
+                <input onChange={this.handleFieldChange} type="password" id="password" className="form-control" defaultValue={this.props.newPassword} placeholder="Password" required="" />
                 <div className="checkbox mb-3">
                     <input type="checkbox" value="remember-me" /> Remember me
                 </div>
