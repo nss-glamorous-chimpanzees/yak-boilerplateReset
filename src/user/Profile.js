@@ -7,7 +7,8 @@ class Profile extends Component {
     state = {
         userObject: {},
         status: "",
-        relationshipId: null
+        relationshipId: null, 
+        requestObject: {}
     }
 
     //event handler for removeFriend button
@@ -21,7 +22,7 @@ class Profile extends Component {
         const friendRequest =
             {
                 requestingFriendId: this.props.activeUser,
-                acceptedFriendId: this.props.viewingUser
+                acceptedFriendId: parseInt(this.props.viewingUser)
             }
         fetch(`http://localhost:5001/friendRequests`,
             {
@@ -35,6 +36,26 @@ class Profile extends Component {
         this.props.showView("home")
     }.bind(this)
 
+    acceptFriend = function () {
+        const friendRequest = {requestingFriendId: parseInt(this.props.viewingUser), acceptedFriendId: this.props.activeUser}
+        fetch(`http://localhost:5001/friends`,
+            {
+                method: "POST",
+                headers: {
+                    'content-type': 'application/json'
+                },
+                body: JSON.stringify(friendRequest)
+            })
+        fetch(`http://localhost:5001/friendRequests/${this.state.requestObject.id}`, {method: "DELETE"})
+        alert (`You and ${this.state.userObject.first} are now friends!`)
+        this.props.showView("home")
+    }.bind(this)
+        
+    rejectFriend = function () {
+        fetch(`http://localhost:5001/friendRequests/${this.state.requestObject.id}`, {method: "DELETE"})
+        this.props.showView("home")
+    }.bind(this)
+
     //function to build appropriate friend affordance on the profile
     friendAffordance = function () {
         switch (this.state.status) {
@@ -42,6 +63,8 @@ class Profile extends Component {
                 return (<input type="button" onClick={this.removeFriendHandler} value="Remove Friend"/>)
             case "you":
                 return (<p>This is you</p>)
+            case "friend-request":
+                return (<div><input type="button" onClick={this.acceptFriend} value="Accept Friend Request"/><input type="button" onClick={this.rejectFriend} value="Reject Friend Request"/></div>)
             case "not-friends":
                 return (<input type="button" onClick={this.addFriendHandler} value="Add Friend"/>)
             default:
@@ -51,6 +74,7 @@ class Profile extends Component {
 
 
     componentDidMount() {
+        let friend
         fetch(`http://localhost:5001/users?id=${this.props.viewingUser}`)
             .then(r => r.json())
             .then(user => {
@@ -59,10 +83,20 @@ class Profile extends Component {
             })
             .then(r => r.json())
             .then(friends => {
-                const friend = friends.find(friend =>
+                friend = friends.find(friend =>
                     ((friend.requestingFriendId === parseInt(this.props.activeUser) && friend.acceptedFriendId === parseInt(this.props.viewingUser))
-                        || (friend.requestingFriendId === parseInt(this.props.viewingUser) && friend.acceptedFriendId === parseInt(this.props.activeUser)))
-                )
+                        || (friend.requestingFriendId === parseInt(this.props.viewingUser) && friend.acceptedFriendId === parseInt(this.props.activeUser))))
+                return fetch(`http://localhost:5001/friendRequests?acceptedFriendId=${this.props.activeUser}`)
+            })
+            .then(r => r.json())
+            .then(friendRequests => {
+                console.log(friendRequests);
+                const friendRequest = friendRequests.find(request => request.requestingFriendId === parseInt(this.props.viewingUser))
+                console.log(friendRequest);
+                
+                this.setState({
+                    requestObject: friendRequest
+                })
                 if (this.props.viewingUser === this.props.activeUser) {
                     this.setState({
                         status: "you"
@@ -71,6 +105,10 @@ class Profile extends Component {
                     this.setState({
                         status: "friends",
                         relationshipId: friend.id
+                    })
+                } else if (friendRequest) {
+                    this.setState({
+                        status: "friend-request"
                     })
                 } else {
                     this.setState({
