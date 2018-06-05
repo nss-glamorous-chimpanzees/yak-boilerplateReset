@@ -58,7 +58,7 @@ export default class Post extends Component {
                     <p className="post-date">{this.props.post.date}</p>
 
             {/* ternary will render an image only if there is one available in the database. Otherwise, it will render an empty paragraph */}
-                    {this.props.post.image ? (
+                    {this.props.post.image.startsWith("http") ? (
                         <img src={this.props.post.image} className="post-image" alt={this.props.post.title} />
                     ) : (
                         <p></p>

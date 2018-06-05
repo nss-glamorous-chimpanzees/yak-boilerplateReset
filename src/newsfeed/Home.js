@@ -3,18 +3,20 @@ import "./Home.css"
 import PostList from "./PostList";
 import AdList from "../ads/AdList";
 import FriendList from "../friends/FriendList";
+import Option from './Option'
 
 export default class Home extends Component {
-
+    
     state = {
         posts: [],
         userIds: [],
         message: "",
         title: "",
         image: "",
-        toFriendId: null
+        toFriendId: null,
+        friendIdsAndNames: []
     }
-
+    
     //API call to post a new message to the database
     postMessage = (text) => fetch("http://localhost:5001/posts", {
         method: "POST",
@@ -27,8 +29,8 @@ export default class Home extends Component {
             title: this.state.title,
             image: this.state.image,
             date: (new Date()).toLocaleDateString('en-US'),
-            toFriendId: null
-
+            toFriendId: this.state.toFriendId
+            
         })
     })
 
@@ -36,7 +38,7 @@ export default class Home extends Component {
     .then(() => {
         this.getFollowedUsers()
     })
-
+    
     //erases the fields in the new post form
     .then(
         this.setState({
@@ -45,7 +47,7 @@ export default class Home extends Component {
             image: ""
         })
     )
-
+    
     //If the ID for each form element matches a property in this component's state, the value submitted to that form element will be set in state (ex: form field id "message" will set the value of "message" in this component's state when the form is submitted.)
     handleFieldChange = (evt) => {
         const stateToChange = {}
@@ -111,20 +113,55 @@ export default class Home extends Component {
             })
     }
 
-    createFriendDropdown() {
-        let friendArray = []
-        
-        fetch((`http://localhost:5001/`))
-    }
-
 
     
+    createFriendDropdown() {
+        let friendArray
+        let relationships
+        let friendList = []
+        let htmlArray = []
+
+        //This logic duplicates the friend list and should be refactored in the future so we're using the same API calls.
+        fetch(`http://localhost:5001/friends?requestingFriendId=${this.props.activeUser}`)
+        .then(r => r.json())
+        .then(friendItems => {
+            friendArray = friendItems
+            return fetch(`http://localhost:5001/friends?acceptedFriendId=${this.props.activeUser}`)
+        })
+        .then(r => r.json())
+        .then(friendItems => {
+             relationships = friendArray.concat(friendItems)
+             return fetch(`http://localhost:5001/users`)
+        })
+        .then(r => r.json())
+        .then(users => {
+            relationships.forEach(relationship => {
+                if (relationship.requestingFriendId === parseInt(this.props.activeUser)) {
+                    friendList.push(users.find(user => user.id === relationship.acceptedFriendId))
+                } else {
+                    
+                    friendList.push(users.find(user => user.id === relationship.requestingFriendId))
+                }
+            })
+
+            //Once we have a list of friends, create an array of objects that contains just the ID and name. This array will be passed down as props to the Option component during render.
+            friendList.forEach(friend => {
+                htmlArray.push({
+                    id: friend.id,
+                    name: `${friend.first} ${friend.last}`
+                }                
+            )
+            })
+            this.setState({
+                friendIdsAndNames: htmlArray
+            })
+        })
+    }   
     componentDidMount() {
         this.getFollowedUsers()
+        this.createFriendDropdown()
     }
-
-
-
+        
     render() {
         return (
             <div className="container-full">
@@ -141,10 +178,16 @@ export default class Home extends Component {
                                     <input type="text" placeholder="Title" id="title" value={this.state.title} onChange={this.handleFieldChange} className="form-control" />
                                     <textarea id="message" value={this.state.message} onChange={this.handleFieldChange} className="form-control" rows="4"></textarea>
                                     <input type="text" placeholder="Image URL" id="image" value={this.state.image} onChange={this.handleFieldChange} className="form-control" />
+        {/* Drop-down for creating a private chat */}
+                                    <select id="toFriendId" onChange={this.handleFieldChange} label="Private Chat With Friends">
+                                        <option defaultValue="" id="">Public Post</option> 
+                                        {
+                                            this.state.friendIdsAndNames.map(f => <Option key={f.id} id={f.id} name={f.name} />)
+                                        }
+                                     </select>
                                 </div>
                                 <button type="button" onClick={this.postMessage} className="btn btn-info btn-lg">Post</button>
                             </form>
-
                             <PostList posts={this.state.posts} activeUser={this.props.activeUser} />
                         </div>
                     </div>
