@@ -14,8 +14,8 @@ class App extends Component {
     currentView: "login",
     searchTerms: "",
     activeUser: localStorage.getItem("yakId"),
-    email: "",
-    password: ""
+    newEmail: "",
+    newPassword: ""
   };
 
   // Search handler -> passed to NavBar
@@ -36,13 +36,13 @@ class App extends Component {
     }.bind(this);
 
   // Set Username/password field to newly created username and password
-  setUsernamePassword = (newUsername, newPassword) => {
+  setUsernamePassword = function (newUsername, newPassword) {
     this.setState({
-      email: newUsername,
-      password: newPassword
+      newEmail: newUsername,
+      newPassword: newPassword
     })  
     
-  }
+  }.bind(this)
 
   // Function to update local storage and set activeUser state
   setActiveUser = val => {
@@ -100,7 +100,7 @@ class App extends Component {
       );
     } else if (localStorage.getItem("yakId") === null) {
       return (
-        <Login showView={this.showView} setActiveUser={this.setActiveUser} emailPass={this.email} passwordPass={this.password}/>
+        <Login showView={this.showView} setActiveUser={this.setActiveUser} newEmail={this.state.newEmail} newPassword={this.state.newPassword}/>
       );
     } else {
       switch (this.state.currentView) {
@@ -109,6 +109,8 @@ class App extends Component {
             <Login
               showView={this.showView}
               setActiveUser={this.setActiveUser}
+              newEmail={this.newEmail} 
+              newPassword={this.newPassword}
             />
           );
         case "results":
