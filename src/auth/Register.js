@@ -71,7 +71,7 @@ class Register extends Component {
 
           // if doesn't exist, add to user db and forward to login page, passing email/password
         } else {
-          fetch("http://localhost:8088/users", {
+          fetch("http://localhost:5001/users", {
             method: "POST",
             headers: {
               Accept: "application/json",
