@@ -6,6 +6,7 @@ import Home from './newsfeed/Home';
 import Login from './auth/Login';
 import SearchResults from './search/SearchResults';
 import Profile from "./user/Profile"
+import Calendar from "./calendar/Calendar"
 
 class App extends Component {
 
@@ -87,6 +88,8 @@ class App extends Component {
                     return <SearchResults terms={this.state.searchTerms} setViewingUser={this.setViewingUser} showView={this.showView}  />
                 case "profile":
                     return <Profile showView={this.showView} viewingUser={this.state.viewingUser}/>
+                case "calendar":
+                    return <Calendar showView={this.showView} viewingUser={this.state.viewingUser} activeUser={this.state.activeUser}/>
                 case "home":
                 default:
                     return <Home setViewingUser={this.setViewingUser} activeUser={this.state.activeUser} showView={this.showView} />
