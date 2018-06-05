@@ -5,6 +5,7 @@ import NavBar from './nav/NavBar';
 import Home from './newsfeed/Home';
 import Login from './auth/Login';
 import SearchResults from './search/SearchResults';
+import Profile from "./user/Profile"
 
 class App extends Component {
 
@@ -12,7 +13,8 @@ class App extends Component {
     state = {
         currentView: "login",
         searchTerms: "",
-        activeUser: localStorage.getItem("yakId")
+        activeUser: localStorage.getItem("yakId"),
+        viewingUser: ""
     }
 
     // Search handler -> passed to NavBar
@@ -34,6 +36,12 @@ class App extends Component {
             activeUser: val
         })
     }
+    
+    setViewingUser = function (val) {
+        this.setState({
+            viewingUser: val
+        })
+    }.bind(this)
 
     // View switcher -> passed to NavBar and Login
     // Argument can be an event (via NavBar) or a string (via Login)
@@ -65,7 +73,6 @@ class App extends Component {
         Function to determine which main view to render.
 
         TODO:
-            1. Profile view
             2. Register view
             3. Create event view
     */
@@ -78,9 +85,11 @@ class App extends Component {
                     return <Login showView={this.showView} setActiveUser={this.setActiveUser} />
                 case "results":
                     return <SearchResults terms={this.state.searchTerms} />
+                case "profile":
+                    return <Profile showView={this.showView} viewingUser={this.state.viewingUser}/>
                 case "home":
                 default:
-                    return <Home activeUser={this.state.activeUser} />
+                    return <Home setViewingUser={this.setViewingUser} activeUser={this.state.activeUser} showView={this.showView} />
             }
         }
     }
