@@ -57,7 +57,7 @@ class Register extends Component {
     const submittedImageUrl = this.state.image;
     const submittedLocation = this.state.location;
 
-    fetch(`http://localhost:8088/users?email=${submittedEmail}`)
+    fetch(`http://localhost:5001/users?email=${submittedEmail}`)
       // Must be explicit on how to parse the response
       .then(r => r.json())
 
