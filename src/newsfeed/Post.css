@@ -1,8 +1,42 @@
-.post__author {
+.post-author {
     font-size: large;
     width: 18rem;
+    border: 1px solid darkslategray;
+}
+
+.post-author img {
+    height: 30px;
+    float: left;
+    margin: 3px;
 }
 
 .post {
     margin: 10px 0 0 0;
+}
+
+.private {
+    border: 1px solid red;
+}
+
+.post-body {
+
+}
+
+.post-title {
+
+}
+
+.post-date {
+
+}
+
+.post-image {
+    height: 200px;
+    display: block;
+    margin: 5px;
+
+}
+
+.post-text {
+
 }
