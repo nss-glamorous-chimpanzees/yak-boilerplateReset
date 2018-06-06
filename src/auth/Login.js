@@ -105,9 +105,6 @@ export default class Login extends Component {
             placeholder="Password"
             required=""
           />
-          <div className="checkbox mb-3">
-            <input type="checkbox" value="remember-me" /> Remember me
-          </div>
           <button className="btn btn-lg btn-primary btn-block" type="submit">
             Sign in
           </button>
