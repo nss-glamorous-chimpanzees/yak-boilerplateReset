@@ -21,7 +21,7 @@ class Profile extends Component {
     addFriendHandler = function () {
         const friendRequest =
             {
-                requestingFriendId: this.props.activeUser,
+                requestingFriendId: parseInt(this.props.activeUser),
                 acceptedFriendId: parseInt(this.props.viewingUser)
             }
         fetch(`http://localhost:5001/friendRequests`,
@@ -37,7 +37,7 @@ class Profile extends Component {
     }.bind(this)
     //handler for the accept friend button
     acceptFriend = function () {
-        const friendRequest = {requestingFriendId: parseInt(this.props.viewingUser), acceptedFriendId: this.props.activeUser}
+        const friendRequest = {requestingFriendId: parseInt(this.props.viewingUser), acceptedFriendId: parseInt(this.props.activeUser)}
         fetch(`http://localhost:5001/friends`,
             {
                 method: "POST",
@@ -91,9 +91,7 @@ class Profile extends Component {
             })
             .then(r => r.json())
             .then(friendRequests => {
-                console.log(friendRequests);
                 const friendRequest = friendRequests.find(request => request.requestingFriendId === parseInt(this.props.viewingUser))
-                console.log(friendRequest);
                 
                 this.setState({
                     requestObject: friendRequest
