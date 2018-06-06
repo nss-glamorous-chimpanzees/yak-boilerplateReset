@@ -6,18 +6,17 @@
 }
 
 .form-control {
-  margin: 5px 0;
+  margin: 15px 0;
+  width: 100%
 }
 h1 {
   color: red;
 }
 
-label {
-
-}
-
 input, select {
   display: block;
+  width: 100%;
+  margin-top: 10px
 }
 
 #emailExistsAlert.emailexists {
