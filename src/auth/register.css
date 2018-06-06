@@ -1,0 +1,25 @@
+.form-login {
+  width: 100%;
+  max-width: 330px;
+  padding: 15px;
+  margin: 120px auto;
+}
+
+.form-control {
+  margin: 5px 0;
+}
+h1 {
+  color: red;
+}
+
+label {
+
+}
+
+input, select {
+  display: block;
+}
+
+#emailExistsAlert.emailexists {
+  display: none
+}

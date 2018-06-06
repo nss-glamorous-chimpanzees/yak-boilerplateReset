@@ -16,11 +16,12 @@ export default class Calendar extends Component {
         fetch(`http://localhost:5001/events?userId=${this.props.activeUser}`)
         .then(response => response.json())
         .then(events => {
-            events.forEach((singleEvent, loc) => {
-                if ((Date.now() + 604800000) <= new Date(singleEvent.date) || new Date(singleEvent.date) <= Date.now() ) {
-                    events.splice(loc, 2)
-                }
-            })
+            // events.forEach((singleEvent, loc) => {
+            //     if ((Date.now() + 604800000) <= new Date(singleEvent.date) 
+            //             || new Date(singleEvent.date) < Date.now() ) {
+            //         events.splice(loc)
+            //     }
+            // })
             this.setState({
                 eventsList: events
             })
@@ -81,13 +82,13 @@ export default class Calendar extends Component {
                 <input type="text" placeholder="Event Name" id="eventName" />
                 <input type="text" placeholder="Event Location" id="eventLocation" />
                 <br />
-                <label for="eventDate">Date:</label>
+                <label htmlFor="eventDate">Date:</label>
                 <input type="date" id="eventDate"/>
                 <br />
-                <label for="eventStart">Start Time:</label>
+                <label htmlFor="eventStart">Start Time:</label>
                 <input type="time" id="eventStart" />
                 <br />
-                <label for="eventEnd">End Time:</label>
+                <label htmlFor="eventEnd">End Time:</label>
                 <input type="time" id="eventEnd" />
                 <br />
                 <input type="button" value="Submit" id="submitNewEvent" onClick={this.handleClick}/>
