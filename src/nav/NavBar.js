@@ -76,6 +76,7 @@ export default class NavBar extends Component {
                         <div><a title="notifications" id="nav__profile" href="#">My Profile</a></div>
                         <div><a title="notifications" id="nav__followers" href="#">My Followers</a></div>
                         <div><a title="notifications" id="nav__friends" href="#">My Friends</a></div>
+                        <div><a title="calendar" id="nav__calendar" href="#" onClick={this.props.viewHandler}>My Calendar</a></div>
                     </section>
                 </article>
             </nav>
