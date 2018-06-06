@@ -14,7 +14,9 @@ class Profile extends Component {
     //event handler for removeFriend button
     removeFriendHandler = function () {
         fetch(`http://localhost:5001/friends/${this.state.relationshipId.toString()}`, { method: "DELETE" })
-        this.props.showView("home")
+        .then(data => {
+            this.props.showView("home")
+        })
     }.bind(this)
 
     //event handler for add friend button
