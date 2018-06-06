@@ -48,8 +48,14 @@ class App extends Component {
   setActiveUser = val => {
     if (val) {
       localStorage.setItem("yakId", val);
+      this.setState({
+        setActiveUser: val
+      })
     } else {
       localStorage.removeItem("yakId");
+      this.setState({
+        setActiveUser: null
+      })
     }
   }
 
