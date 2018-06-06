@@ -123,7 +123,7 @@ class App extends Component {
         case "results":
           return <SearchResults terms={this.state.searchTerms} />;
         case "calendar":
-          return <Calendar activeUser={this.props.activeUser} />;
+          return <Calendar activeUser={this.state.activeUser} />;
         case "home":
         default:
           return <Home activeUser={this.state.activeUser} />;
