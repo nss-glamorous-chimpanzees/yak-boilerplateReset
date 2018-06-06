@@ -1,0 +1,29 @@
+#calendarEvents {
+    width: 100%;
+    max-width: 330px;
+    padding: 15px;
+    margin: 120px auto;
+    text-align: center;
+}
+
+#newEventForm {
+    display: none;
+    text-align: right;
+}
+
+#newEventForm h1 {
+    text-align: center;
+}
+
+
+#newEventForm label{
+    padding-right: 10px;
+}
+
+#submitNewEvent {
+    text-align: center;
+}
+
+#eventFormErrorAlert {
+    display: none;
+}
