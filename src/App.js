@@ -7,6 +7,7 @@ import Home from './newsfeed/Home';
 import Login from './auth/Login';
 import SearchResults from './search/SearchResults';
 import Profile from "./user/Profile"
+import Calendar from "./calendar/Calendar"
 
 class App extends Component {
   // Set initial state

@@ -37,7 +37,7 @@ export default class AdList extends Component {
     update = (removedAdId) =>{
         let allAds = this.state.ads
         allAds.forEach((ad,i) => {
-            if (parseInt(ad.id) === parseInt(removedAdId)) {
+            if (parseInt(ad.id, 10) === parseInt(removedAdId, 10)) {
                 allAds.splice(i, 1)
             }
         })
