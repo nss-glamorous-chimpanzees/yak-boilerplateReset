@@ -7,6 +7,7 @@ import Home from './newsfeed/Home';
 import Login from './auth/Login';
 import SearchResults from './search/SearchResults';
 import Profile from "./user/Profile"
+import Calendar from "./calendar/Calendar"
 
 class App extends Component {
   // Set initial state
@@ -99,6 +100,7 @@ class App extends Component {
             2. Register view
             3. Create event view
     */
+
   View = () => {
     if (this.state.currentView === "register") {
       return (
@@ -121,6 +123,8 @@ class App extends Component {
           );
         case "results":
           return <SearchResults terms={this.state.searchTerms} />;
+        case "calendar":
+          return <Calendar showView={this.showView} viewingUser={this.state.viewingUser} activeUser={this.state.activeUser}/>
         case "home":
         default:
           return <Home activeUser={this.state.activeUser} />;
