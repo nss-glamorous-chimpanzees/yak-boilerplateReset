@@ -7,6 +7,7 @@ import Home from './newsfeed/Home';
 import Login from './auth/Login';
 import SearchResults from './search/SearchResults';
 import Profile from "./user/Profile"
+import Calendar from "./calendar/Calendar"
 
 class App extends Component {
   // Set initial state
@@ -121,6 +122,8 @@ class App extends Component {
           );
         case "results":
           return <SearchResults terms={this.state.searchTerms} />;
+        case "calendar":
+          return <Calendar activeUser={this.props.activeUser} />;
         case "home":
         default:
           return <Home activeUser={this.state.activeUser} />;
