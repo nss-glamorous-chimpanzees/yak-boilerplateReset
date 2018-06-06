@@ -49,12 +49,12 @@ class App extends Component {
     if (val) {
       localStorage.setItem("yakId", val);
       this.setState({
-        setActiveUser: val
+        activeUser: val
       })
     } else {
       localStorage.removeItem("yakId");
       this.setState({
-        setActiveUser: null
+        activeUser: null
       })
     }
   }
