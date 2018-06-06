@@ -123,7 +123,7 @@ class App extends Component {
           return <SearchResults terms={this.state.searchTerms} />;
         case "home":
         default:
-          return <Home activeUser={this.state.activeUser} />;
+          return <Home activeUser={this.state.activeUser} showView={this.showView} setViewingUser={this.setViewingUser} />;
       }
     }
   };
