@@ -100,6 +100,7 @@ class App extends Component {
             2. Register view
             3. Create event view
     */
+
   View = () => {
     if (this.state.currentView === "register") {
       return (
@@ -121,10 +122,12 @@ class App extends Component {
             />
           );
         case "results":
-          return <SearchResults terms={this.state.searchTerms} />;
+          return <SearchResults terms={this.state.searchTerms} setViewingUser={this.setViewingUser} showView={this.showView} />;
+        case "profile":
+          return <Profile activeUser={this.state.activeUser} showView={this.showView} viewingUser={this.state.viewingUser}/>
         case "home":
         default:
-          return <Home activeUser={this.state.activeUser} />;
+          return <Home setViewingUser={this.setViewingUser} activeUser={this.state.activeUser} showView={this.showView} />;
       }
     }
   };
